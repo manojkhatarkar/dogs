@@ -1,0 +1,28 @@
+.mt-25{margin-top:25px;}
+.mt-50{margin-top:50px;}
+.mt-20{margin-top:20px;}
+.ml-120{margin-left:120px;}
+.product-box:hover p.price{display: none;}
+.product-items{width:500px!important;}
+.app-cart{padding: 0;
+    margin: 0;
+    position: absolute;
+    z-index: 9999;
+    bottom: 60px;
+    left: 0;}
+.btn-app{background-image: linear-gradient(-90deg, #069ada,#29e086);
+        width: 200px;
+        margin: 0px!important;
+        border: none;
+        box-shadow: none;
+        border-radius: unset;}
+.falver-sec{ 
+      border-top: 1px solid #a4a3a3 ; 
+        border-bottom: 1px solid #a4a3a3;
+        margin: 10px 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+.kgs{margin: 0 50px;
+    text-align: center;}
+.mt-18{margin-top:18px}

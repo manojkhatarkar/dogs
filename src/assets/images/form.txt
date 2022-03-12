@@ -1,0 +1,95 @@
+<template>
+  <div>
+    <div class="nav"><router-link to="/"><a @click="logout()" class="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></router-link></div>
+    <br>
+      <h1>{{Linkdetails.form_name}}</h1>
+        <!--<ol>
+            <li v-for="item in Linkdetails.all_questions" :key="item.heading"><b>{{item.heading}}</b></li>
+        </ol>-->
+        <div class="main_div" style="margin-bottom:50px;"> 
+            <div v-for="item in Linkdetails.single_choise" :key="item.heading">
+          <b>{{item.heading}}</b><br>
+          Hint: {{item.hint}}<br>
+          <input type="radio" name="option">{{item.op}}
+          
+        </div>
+        </div>
+    <div id="footer">
+      <!--<router-link to="/">Home</router-link> |-->
+      <router-link to="/about">About</router-link> |
+      <router-link to="/contact">Contact</router-link> |
+      <router-link to="/dashboard">Dashboard</router-link> |
+      <router-link to="/form">Form</router-link>
+      <router-link v-if="authenticated" to="/login" v-on:click.native="logout()" replace>Logout</router-link>
+    </div> 
+    
+  </div>
+</template>
+
+
+<style>
+body{background-color: #dbdbdb;}
+.login_div{background-color:white;height: 100%;padding: 60px 20px 60px;border-radius: 18px;}
+.login_btn{font-size: 20px;}
+.login_input{font-size: 20px;
+    border: 1px solid gray;
+    text-align: center;}
+#footer{
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: red;
+   color: white;
+   text-align: center;
+}
+</style>
+
+<script>
+import axios from 'axios';
+
+var user_id=localStorage.getItem('uid');
+  //alert(uid);
+export default {
+  components:{
+
+  },
+  data() {
+    return{
+       URL:'https://mssinfotech.co.in/gas_agency/',
+       Linkdetails:[]
+      
+    }
+  },
+  mounted() {
+    this.linkdetails();
+    //this.single_choise_heading();
+     },
+
+methods: {
+     
+    linkdetails(){
+        var ev=this;
+      axios.get(this.URL + 'ajax.php', {
+        params: {
+          type: 'new_forms',
+          uid: user_id
+        }
+      }).then(function (response) {
+        ev.Linkdetails = response.data
+        //ev.single_choise_heading=ev.Linkdetails.single_choise.heading
+       // chat=response.data;
+        console.log(ev.Linkdetails.single_choise);
+        console.log(ev.Linkdetails.single_choise.op);
+        //console.log(ev.Linkdetails.single_choise);
+        //console.log(ev.Linkdetails.single_choise.options);
+      })
+    },
+   logout(){
+     //localStorage.removeItem('uid');
+     localStorage.clear();
+   } 
+  }
+}
+
+</script>
